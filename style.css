@@ -1,0 +1,1877 @@
+/* css/style.css */
+
+
+/* 1. IMPORTS & VARIABLES */
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap");
+:root {
+    --primary: #2563eb;
+    /* Biru Utama */
+    --secondary: #1e40af;
+    /* Biru Gelap */
+    --accent: #d97706;
+    /* Oranye/Emas (Aksen Buku) */
+    --light: #f9fafb;
+    /* Background Halaman */
+    --dark: #1f2937;
+    /* Teks Gelap */
+    --danger: #ef4444;
+    /* Merah (Hapus/Error) */
+    --success: #10b981;
+    /* Hijau (Tombol Daftar) */
+}
+
+
+/* 2. GLOBAL RESET */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* 3. NAVBAR (GLASSMORPHISM & LAYOUT) */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.9);
+    /* Transparan */
+    backdrop-filter: blur(10px);
+    /* Efek Buram */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+/* Logo Style */
+
+.logo {
+    font-family: "Poppins", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo i {
+    color: var(--primary);
+}
+
+
+/* Menu Tengah (Desktop) */
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: #444;
+    font-size: 0.95rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+
+/* Animasi Garis Bawah Menu */
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* Active State (Halaman yang sedang dibuka) */
+
+.nav-links a.active-link {
+    color: var(--primary);
+}
+
+.nav-links a.active-link::after {
+    width: 100%;
+}
+
+
+/* Icons Kanan */
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-btn {
+    font-size: 1.2rem;
+    color: var(--dark);
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    color: var(--primary);
+    background-color: rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+
+/* Badge Cart (Angka Merah) */
+
+.cart-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--danger);
+    color: white;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+
+/* Hamburger Menu (Default Hidden) */
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+    margin-left: 0.5rem;
+}
+
+
+/* 4. HERO SECTION (BANNER) */
+
+.hero {
+    /* Gambar Toko Buku Cozy */
+    background-image: url("https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* Overlay Gelap */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-family: "Poppins", serif;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-hero {
+    background-color: var(--accent);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+}
+
+.btn-hero:hover {
+    background-color: #b45309;
+    transform: scale(1.05);
+}
+
+
+/* 5. CONTAINERS & LAYOUT */
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+
+/* Auth Box (Login/Register) */
+
+.auth-box {
+    max-width: 400px;
+    margin: 8rem auto 5rem auto;
+    /* Posisi turun ke bawah */
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.login-image {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto 1.5rem auto;
+}
+
+
+/* 6. FORMS & BUTTONS */
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #059669;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+
+/* Tombol Login & Daftar Sejajar */
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.btn-group .btn {
+    flex: 1;
+}
+
+
+/* 7. SEARCH BOX */
+
+.search-box {
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem 1.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 50px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+}
+
+
+/* 8. PRODUCT GRID */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #f3f4f6;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-family: "Poppins", serif;
+}
+
+.product-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    height: 40px;
+    overflow: hidden;
+}
+
+
+/* Batasi tinggi deskripsi */
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+
+/* 9. TABLES (Cart & Admin) */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #f9fafb;
+}
+
+
+/* 10. MEDIA QUERIES (RESPONSIVE HP) */
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+    .hero {
+        height: 300px;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    /* Mobile Menu Logic */
+    .hamburger {
+        display: block;
+    }
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-200%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 998;
+    }
+    .nav-links.active {
+        transform: translateY(0);
+    }
+    .nav-links a {
+        margin: 0.8rem 0;
+        font-size: 1.1rem;
+    }
+    .nav-icons {
+        gap: 0.8rem;
+    }
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    /* 2 Kolom di HP */
+}
+
+@media screen and (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    /* 1 Kolom di HP kecil */
+    .btn-group {
+        flex-direction: column;
+    }
+    /* Tombol login/daftar vertikal di layar sangat kecil */
+}
+
+
+/* css/style.css - Tambahkan di paling bawah */
+
+
+/* --- HALAMAN DETAIL PRODUK --- */
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    color: var(--primary);
+}
+
+.detail-container {
+    display: flex;
+    gap: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Kolom Kiri (Gambar) */
+
+.detail-left {
+    flex: 1;
+    max-width: 400px;
+}
+
+.detail-img-large {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Kolom Kanan (Info) */
+
+.detail-right {
+    flex: 1.5;
+}
+
+.detail-title {
+    font-family: "Poppins", serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.detail-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-desc h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.detail-desc p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+
+/* Area Tombol & Qty */
+
+.action-area {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.qty-box {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.qty-box button {
+    background: #f3f4f6;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.qty-box button:hover {
+    background: #e5e7eb;
+}
+
+.qty-box input {
+    width: 50px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-lg {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+
+/* css/style.css - Tambahkan di paling bawah */
+
+
+/* --- Update Tombol Aksi di Halaman Detail --- */
+
+.action-area {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    /* Ubah jadi vertikal dulu agar rapi */
+    gap: 1.5rem;
+}
+
+.qty-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+
+/* Grup Tombol Sejajar */
+
+.btn-action-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+
+/* Tombol Keranjang (Gaya Outline/Garis) */
+
+
+/* css/style.css */
+
+
+/* Update Style Tombol Keranjang */
+
+.btn-outline {
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 12px 25px;
+    flex: 1;
+    /* Lebar 50% */
+    font-weight: 600;
+    /* Tambahan agar sama persis strukturnya dengan tombol Beli */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    /* Animasi (Goyang/Gerak Halus) */
+    transition: all 0.3s ease;
+}
+
+
+/* Efek saat disentuh mouse */
+
+.btn-outline:hover {
+    background: #f0f7ff;
+    /* Warna background jadi biru sangat muda */
+    border-color: var(--secondary);
+    color: var(--secondary);
+    /* EFEK GOYANG (Naik sedikit ke atas) */
+    transform: translateY(-3px);
+    /* Tambah bayangan agar terlihat melayang */
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+.btn-outline:hover {
+    background: #f0f7ff;
+}
+
+
+/* Tombol Beli Sekarang (Gaya Solid & Menonjol) */
+
+.btn-buy {
+    background: var(--primary);
+    /* Bisa ganti warna lain misal Orange: #f97316 */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    flex: 1;
+    /* Lebar 50% */
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn-buy:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+
+/* Responsif di HP */
+
+@media screen and (max-width: 480px) {
+    .btn-action-group {
+        flex-direction: column;
+        /* Tombol jadi atas-bawah di layar kecil */
+    }
+}
+
+
+/* Responsif untuk HP */
+
+@media screen and (max-width: 768px) {
+    .detail-container {
+        flex-direction: column;
+    }
+    .detail-left {
+        max-width: 100%;
+    }
+    .action-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+
+/* css/style.css - Tambahkan di paling bawah */
+
+
+/* --- CHECKOUT PAGE STYLING --- */
+
+.checkout-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    /* Agar kolom kanan sticky berfungsi */
+}
+
+
+/* Kolom Kiri (Form) */
+
+.checkout-left {
+    flex: 1.5;
+    /* Lebih lebar */
+}
+
+.checkout-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #eee;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title i {
+    color: var(--primary);
+}
+
+
+/* Form Grid */
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .half {
+    flex: 1;
+}
+
+
+/* Pilihan Pembayaran */
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.payment-option:hover {
+    background: #f9fafb;
+    border-color: var(--primary);
+}
+
+.payment-option input {
+    accent-color: var(--primary);
+    transform: scale(1.2);
+}
+
+
+/* Kolom Kanan (Ringkasan Pesanan) */
+
+.checkout-right {
+    flex: 1;
+    /* Lebih kecil */
+    position: sticky;
+    /* Menempel saat discroll */
+    top: 100px;
+    /* Jarak dari atas (di bawah navbar) */
+}
+
+.order-summary-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+
+/* Item Barang di Ringkasan */
+
+.order-items {
+    max-height: 300px;
+    overflow-y: auto;
+    /* Scroll jika barang banyak */
+    margin: 1.5rem 0;
+    padding-right: 5px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.item-img-wrapper {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.item-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.item-qty {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #666;
+    color: white;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.item-details h4 {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.item-details p {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.item-subtotal {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+
+/* Bagian Total Harga */
+
+.summary-details {
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.summary-row.total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed #eee;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--dark);
+}
+
+.btn-lg {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+/* Responsive Mobile */
+
+@media screen and (max-width: 768px) {
+    .checkout-layout {
+        flex-direction: column-reverse;
+        /* Ringkasan pindah ke atas di HP, atau normal column jika ingin di bawah */
+    }
+    .checkout-right {
+        position: static;
+        width: 100%;
+    }
+}
+
+
+/* css/style.css - Tambahkan di paling bawah */
+
+
+/* --- Tombol Qty Kecil untuk Halaman Checkout --- */
+
+.checkout-item-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.checkout-qty-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    background: white;
+}
+
+.checkout-qty-box button {
+    background: #f9fafb;
+    border: none;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+    transition: 0.2s;
+}
+
+.checkout-qty-box button:hover {
+    background: #e5e7eb;
+}
+
+.checkout-qty-box span {
+    padding: 0 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+
+/* Tombol Hapus Kecil (Sampah) */
+
+.btn-remove-small {
+    color: #ef4444;
+    /* Merah */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+.btn-remove-small:hover {
+    color: #dc2626;
+    transform: scale(1.1);
+}
+
+
+/* css/style.css - Tambahkan di Paling Bawah */
+
+
+/* --- HALAMAN STATUS PESANAN (ORDERS) --- */
+
+
+/* Tab Navigasi di atas */
+
+.status-tabs {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    /* Agar bisa discroll di HP */
+    white-space: nowrap;
+}
+
+.status-tabs .tab {
+    padding-bottom: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    position: relative;
+}
+
+.status-tabs .tab.active {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.status-tabs .tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px 3px 0 0;
+}
+
+
+/* Kartu Pesanan */
+
+.order-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+
+/* Header Kartu */
+
+.order-header {
+    background: #fcfcfc;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.order-id {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+
+/* Status Badge (Warna-warni) */
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-processing {
+    background: #fff7ed;
+    color: #c2410c;
+    /* Oranye */
+}
+
+.badge-shipping {
+    background: #eff6ff;
+    color: #1d4ed8;
+    /* Biru */
+}
+
+.badge-success {
+    background: #ecfdf5;
+    color: #047857;
+    /* Hijau */
+}
+
+
+/* Body Kartu */
+
+.order-body {
+    padding: 1.5rem;
+}
+
+.order-mini-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.order-mini-item:last-child {
+    margin-bottom: 0;
+}
+
+.order-mini-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.mini-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* Footer Kartu */
+
+.order-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-info small {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.total-info .price {
+    font-weight: bold;
+    color: var(--dark);
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Responsive Mobile */
+
+@media screen and (max-width: 600px) {
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .status-badge {
+        align-self: flex-start;
+    }
+    .order-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .action-buttons {
+        justify-content: space-between;
+    }
+    .action-buttons button {
+        flex: 1;
+    }
+}
+
+
+/* css/style.css - Tambahkan di Paling Bawah */
+
+
+/* --- HALAMAN DETAIL PESANAN (TIMELINE) --- */
+
+.detail-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+    margin-bottom: 1.5rem;
+}
+
+.order-id-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* TRACKING TIMELINE STYLE */
+
+.track-timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 20px 0;
+}
+
+
+/* Garis abu-abu di belakang */
+
+.track-timeline::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #e0e0e0;
+    z-index: 0;
+}
+
+.track-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 25%;
+    background: white;
+    /* Penutup garis di belakang ikon */
+}
+
+.track-step .icon {
+    width: 35px;
+    height: 35px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto;
+    color: white;
+    font-size: 0.9rem;
+    border: 3px solid white;
+    /* Border putih agar garis belakang terputus rapi */
+}
+
+.track-step p {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+}
+
+
+/* State AKTIF (Sudah dilewati) */
+
+.track-step.active .icon {
+    background: var(--success);
+    /* Hijau */
+}
+
+.track-step.active p {
+    color: var(--dark);
+    font-weight: bold;
+}
+
+
+/* Membuat garis hijau hanya sampai step aktif */
+
+
+/* Ini trik CSS lanjut menggunakan gradient */
+
+
+/* Tapi untuk simpel, kita pakai logika JS class active saja */
+
+
+/* GRID LAYOUT UNTUK INFO PENGIRIMAN */
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+
+/* Responsif HP */
+
+@media screen and (max-width: 600px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    .track-step p {
+        font-size: 0.7rem;
+    }
+    .track-step .icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+
+/* css/style.css - Tambahkan di Paling Bawah */
+
+
+/* --- TAMPILAN KERANJANG MODERN --- */
+
+.cart-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.cart-items-list {
+    flex: 2;
+    /* Kolom kiri lebih lebar */
+}
+
+
+/* Kartu Produk di Keranjang */
+
+.cart-item-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    transition: 0.3s;
+}
+
+.cart-item-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.cart-img-wrapper {
+    width: 80px;
+    height: 110px;
+    flex-shrink: 0;
+}
+
+.cart-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-info {
+    flex-grow: 1;
+}
+
+.cart-info h4 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.cart-info .item-price {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
+/* Kontrol Kuantitas & Hapus */
+
+.cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto;
+    /* Dorong ke kanan */
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.qty-control button {
+    background: #f9fafb;
+    border: none;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+.qty-control button:hover {
+    background: #e5e7eb;
+}
+
+.qty-control span {
+    padding: 0 10px;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.btn-trash {
+    color: #999;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-trash:hover {
+    color: var(--danger);
+    transform: scale(1.1);
+}
+
+
+/* Sidebar Ringkasan (Kanan) */
+
+.cart-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 100px;
+}
+
+.summary-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Responsif HP */
+
+@media screen and (max-width: 768px) {
+    .cart-layout {
+        flex-direction: column;
+    }
+    .cart-actions {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .cart-item-card {
+        flex-wrap: wrap;
+    }
+    .cart-info {
+        width: 100%;
+    }
+}
+
+
+/* Tambahan badge Belum Bayar */
+
+.badge-pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+
+/* css/style.css - Tambahkan di Paling Bawah */
+
+
+/* --- ADMIN PANEL STYLES --- */
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* 1. SIDEBAR (KIRI) */
+
+.sidebar {
+    width: 260px;
+    background: #1e293b;
+    /* Warna Gelap Profesional */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    /* Tetap di kiri saat scroll */
+    height: 100vh;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Poppins', serif;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 1rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 1.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+    background: #334155;
+    color: white;
+    border-right: 4px solid var(--primary);
+}
+
+
+/* 2. MAIN CONTENT (KANAN) */
+
+.main-content {
+    margin-left: 260px;
+    /* Memberi ruang untuk sidebar */
+    flex: 1;
+    padding: 2rem;
+    background: #f3f4f6;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.admin-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.admin-user-profile img {
+    width: 35px;
+    border-radius: 50%;
+}
+
+
+/* 3. STATS CARDS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-icon.income {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* Hijau */
+
+.stat-icon.orders {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+
+/* Biru */
+
+.stat-icon.products {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+
+/* Oranye */
+
+.stat-icon.users {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+
+/* Ungu */
+
+.stat-info p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.stat-info h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+}
+
+
+/* 4. TABEL ADMIN */
+
+.recent-orders-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 1rem;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-text {
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+
+/* css/style.css - Tambahkan di Paling Bawah */
+
+
+/* --- ADMIN ACTION BUTTONS --- */
+
+.btn-action {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn-action.edit {
+    background: #f59e0b;
+}
+
+
+/* Kuning */
+
+.btn-action.edit:hover {
+    background: #d97706;
+}
+
+.btn-action.delete {
+    background: #ef4444;
+}
+
+
+/* Merah */
+
+.btn-action.delete:hover {
+    background: #dc2626;
+}
+
+
+/* --- MODAL POPUP STYLES --- */
+
+.modal-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Latar Gelap Transparan */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-header h3 {
+    font-family: 'Poppins', serif;
+}
+
+.close-modal {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-modal:hover {
+    color: var(--danger);
+}
