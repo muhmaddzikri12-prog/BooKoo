@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <title>Kelola Produk - Admin PustakaKita</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body style="background-color: #f3f4f6;">
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-book-open"></i> BooKoo
+                <span style="font-size: 0.8rem; display:block; margin-top:5px; opacity:0.7;">Administrator</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="admin.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="admin-products.html" class="active"><i class="fas fa-book"></i> Kelola Produk</a></li>
+                <li><a href="admin-orders.html"><i class="fas fa-shopping-cart"></i> Pesanan Masuk</a></li>
+                <li style="margin-top: auto;">
+                    <a href="home.html" style="color: #ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="admin-header">
+                <h2>Daftar Buku</h2>
+                <button class="btn btn-primary" onclick="openModal('add')">
+                    <i class="fas fa-plus"></i> Tambah Buku
+                </button>
+            </header>
+
+            <div class="recent-orders-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th width="50">No</th>
+                            <th width="80">Gambar</th>
+                            <th>Judul Buku</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th width="150">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Tambah Buku Baru</h3>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="editId">
+                    <div class="form-group">
+                        <label>Judul Buku</label>
+                        <input type="text" id="pName" class="form-control" required placeholder="Contoh: Laskar Pelangi">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Harga (Rp)</label>
+                            <input type="number" id="pPrice" class="form-control" required placeholder="100000">
+                        </div>
+                        <div class="form-group half">
+                            <label>Stok</label>
+                            <input type="number" id="pStock" class="form-control" required placeholder="10">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Link Gambar / Nama File</label>
+                        <input type="text" id="pImage" class="form-control" required placeholder="img/buku1.jpg atau https://...">
+                        <small style="color:#666;">Gunakan <code>img/namafile.jpg</code> jika file ada di komputer.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Deskripsi Singkat</label>
+                        <textarea id="pDesc" class="form-control" rows="3" required placeholder="Sinopsis buku..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Simpan Buku</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        // --- LOGIKA ADMIN PRODUK ---
+
+        let products = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+        });
+
+        function loadProducts() {
+            products = JSON.parse(localStorage.getItem('products')) || [];
+            const tbody = document.getElementById('product-table-body');
+
+            if (products.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Belum ada buku. Silakan tambah.</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            products.forEach((p, index) => {
+                // Warna stok: Merah jika habis, Oranye jika dikit
+                let stockColor = p.stock < 5 ? 'color:red; font-weight:bold;' : 'color:green;';
+                if (p.stock === 0) stockColor = 'color:red; font-weight:bold; background:#fee2e2; padding:2px 5px; border-radius:4px;';
+
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><img src="${p.image}" style="width:50px; border-radius:4px; border:1px solid #eee;"></td>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${formatRupiah(p.price)}</td>
+                        <td><span style="${stockColor}">${p.stock}</span></td>
+                        <td>
+                            <button class="btn-action edit" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn-action delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('productModal');
+
+        function openModal(mode, id = null) {
+            modal.style.display = 'flex';
+            const form = document.getElementById('productForm');
+
+            if (mode === 'add') {
+                document.getElementById('modalTitle').innerText = 'Tambah Buku Baru';
+                document.getElementById('editId').value = '';
+                form.reset(); // Kosongkan form
+            } else {
+                document.getElementById('modalTitle').innerText = 'Edit Buku';
+                const p = products.find(item => item.id === id);
+
+                // Isi form dengan data lama
+                document.getElementById('editId').value = p.id;
+                document.getElementById('pName').value = p.name;
+                document.getElementById('pPrice').value = p.price;
+                document.getElementById('pStock').value = p.stock;
+                document.getElementById('pImage').value = p.image;
+                document.getElementById('pDesc').value = p.desc;
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Tutup modal jika klik di luar kotak
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        function editProduct(id) {
+            openModal('edit', id);
+        }
+
+        // --- SIMPAN DATA (CREATE / UPDATE) ---
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const idEdit = document.getElementById('editId').value;
+            const name = document.getElementById('pName').value;
+            const price = parseInt(document.getElementById('pPrice').value);
+            const stock = parseInt(document.getElementById('pStock').value);
+            const image = document.getElementById('pImage').value;
+            const desc = document.getElementById('pDesc').value;
+
+            if (idEdit) {
+                // UPDATE (EDIT)
+                const index = products.findIndex(p => p.id == idEdit);
+                products[index] = {
+                    id: parseInt(idEdit),
+                    name,
+                    price,
+                    desc,
+                    image,
+                    stock
+                };
+                alert('Buku berhasil diperbarui!');
+            } else {
+                // CREATE (TAMBAH BARU)
+                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+                products.push({
+                    id: newId,
+                    name,
+                    price,
+                    desc,
+                    image,
+                    stock
+                });
+                alert('Buku baru berhasil ditambahkan!');
+            }
+
+            localStorage.setItem('products', JSON.stringify(products));
+            closeModal();
+            loadProducts(); // Refresh tabel
+        });
+
+        // --- HAPUS DATA (DELETE) ---
+        function deleteProduct(id) {
+            if (confirm('Yakin ingin menghapus buku ini?')) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('products', JSON.stringify(products));
+                loadProducts();
+            }
+        }
+    </script>
+</body>
+
+</html>

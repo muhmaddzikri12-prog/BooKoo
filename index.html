@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <title>Login - BooKoo</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* CSS Tambahan Khusus Halaman Ini */
+        
+        .auth-box {
+            margin-top: 4rem;
+        }
+        
+        .login-image {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto 1.5rem auto;
+        }
+        /* --- FITUR BARU: TOMBOL SEJAJAR --- */
+        
+        .btn-group {
+            display: flex;
+            /* Membuat elemen di dalamnya sejajar (horizontal) */
+            gap: 10px;
+            /* Jarak antar tombol */
+            margin-top: 1.5rem;
+            /* Jarak dari input password ke tombol */
+        }
+        
+        .btn-group .btn {
+            flex: 1;
+            /* Membuat lebar kedua tombol sama rata (50:50) */
+            text-align: center;
+            /* Teks rata tengah */
+            text-decoration: none;
+            /* Hilangkan garis bawah pada link */
+        }
+        /* Warna khusus tombol daftar (misal Hijau) agar beda dengan login */
+        
+        .btn-success {
+            background-color: #f59e0b;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="Login Illustration" class="login-image" />
+
+        <h2 style="text-align: center; margin-bottom: 1rem">
+            Selamat Datang di BooKoo
+        </h2>
+        <p style="text-align: center; color: #666; margin-bottom: 1.5rem">
+            Silakan login atau daftar akun baru
+        </p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Contoh: user@email.com" required />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" placeholder="******" required />
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Masuk</button>
+
+                <a href="register.html" class="btn btn-success">Daftar</a>
+            </div>
+            <p style="margin-top: 1rem; text-align: center">
+                <small>Login Sebagai
+            <a href="admin-login.html" style="color: blue"
+              ><b><u>Admin</u></b></a
+            ></small
+          >
+        </p>
+      </form>
+    </div>
+
+    <script>
+      // Script Cek Login (Sama seperti sebelumnya)
+      if (!localStorage.getItem("users")) {
+        const demoUser = [
+          {
+            name: "User Demo",
+            email: "user@demo.com",
+            password: "123",
+          },
+        ];
+        localStorage.setItem("users", JSON.stringify(demoUser));
+      }
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const emailInput = document.getElementById("email").value;
+          const passInput = document.getElementById("password").value;
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+          const validUser = users.find(
+            (u) => u.email === emailInput && u.password === passInput
+          );
+
+          if (validUser) {
+            localStorage.setItem("user_active", JSON.stringify(validUser));
+            alert("Login Berhasil! Selamat datang, " + validUser.name);
+            window.location.href = "home.html";
+          } else {
+            alert("Email atau Password salah!");
+          }
+        });
+    </script>
+  </body>
+</html>
